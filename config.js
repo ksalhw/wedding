@@ -39,7 +39,7 @@ const CONFIG = {
 
   wedding: {
     date: "2026-08-08",
-    time: "14:30",
+    time: "14:00",
     venue: "한국기독교연합회관 연합웨딩홀",
     hall: "3층 아가페홀",
     address: "서울특별시 종로구 김상옥로 30",
