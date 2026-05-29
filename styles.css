@@ -975,3 +975,36 @@ html body .wrapper .wedding-calendar .calendar-grid span.day-num.wedding-day > s
   justify-content: center !important;
   margin: 0 auto !important;
 }
+
+
+.wedding-schedule-notice {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 0 16px;
+}
+
+.wedding-time-highlight {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.wedding-meal-info {
+  background-color: #fbfaf7;
+  border: 1px solid #eae7e0;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #666;
+  max-width: 320px;
+  margin: 0 auto;
+  word-break: keep-all;
+}
+
+.wedding-meal-info strong {
+  color: #e54d42;
+  font-weight: 500;
+}
