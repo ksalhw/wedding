@@ -670,3 +670,19 @@
     init();
   }
 })();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const noticeBox = document.getElementById("custom-meal-notice-box");
+  if (noticeBox) {
+    noticeBox.innerHTML = `
+      <div class="wedding-schedule-bottom" style="text-align: center; margin: 24px auto 32px auto; padding: 0 16px;">
+        <div class="wedding-time-highlight" style="font-size: 16px; font-weight: 600; color: #111; margin-bottom: 12px;">2026년 8월 8일 토요일 오후 2시</div>
+        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 13px; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
+          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
+          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
+        </div>
+      </div>
+    `;
+  }
+});
