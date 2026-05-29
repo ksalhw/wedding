@@ -16,372 +16,134 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   
   <style>
-    /* 기본 리셋 및 모바일 뷰포트 설정 */
-    * {
-      box-sizing: border-box;
+    /* ==========================================================================
+       [보내주신 원본 CSS 스타일 그대로 100% 복원]
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-      background-color: #f4f4f6;
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #333;
-      line-height: 1.6;
+      background: #fff;
+      line-height: 1.8;
+      letter-spacing: -0.02em;
       -webkit-font-smoothing: antialiased;
-    }
-    .wrapper {
-      max-width: 450px;
-      margin: 0 auto;
-      background-color: #fff;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-      min-height: 100vh;
-      padding-bottom: 50px;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
-    /* 공통 섹션 레이아웃 */
-    .section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .section-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #b39283;
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: #444;
-      margin-bottom: 15px;
-    }
-    .section-divider {
-      width: 30px;
-      height: 1px;
-      background-color: #dcdcdc;
-      margin: 0 auto 30px auto;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    /* 커튼 오버레이 스타일 */
-    .curtain-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #fff;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .curtain-btn {
-      padding: 12px 24px;
-      background-color: #b39283;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
+    button {
+      font-family: inherit;
       cursor: pointer;
-      font-size: 0.95rem;
-      margin-top: 20px;
+      border: none;
+      background: none;
+      font-size: inherit;
     }
 
-    /* 히어로 상단 이미지 */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .wrapper {
+        max-width: 520px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .wrapper {
+        max-width: 560px;
+      }
+    }
+
+    .section {
+      padding: 80px 16px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 32px;
+      letter-spacing: -0.03em;
+      line-height: 1.4;
+    }
+
+    .section-divider {
+      width: 32px;
+      height: 1px;
+      background: #ccc;
+      margin: 0 auto 32px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      background-color: #eae6e1;
+      height: 100svh;
+      min-height: 600px;
+      max-height: 900px;
       overflow: hidden;
     }
+
     .hero-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
     }
+
     .hero-overlay {
       position: absolute;
-      bottom: 60px;
-      left: 0; right: 0;
-      text-align: center;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-
-    /* =======================================================
-       ★ 중요: 카운트다운 및 달력 섹션 정렬 레이아웃 버그 수정
-    ======================================================= */
-    .section.countdown {
-      display: flex;
-      flex-direction: column; /* 자식 요소들을 무조건 위에서 아래로 세로 배치 */
-      align-items: center;    /* 모든 자식을 가로축 중앙정렬 */
-      width: 100%;
-      background-color: #faf9f8;
-    }
-
-    /* 1. 달력 바로 위: 날짜 및 시간 안내 스타일 */
-    .wedding-datetime-notice {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
-      display: block; /* 줄바꿈 강제 및 독립 공간 확보 */
-    }
-    .wedding-datetime-notice h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #4a4a4a;
-      letter-spacing: -0.5px;
-    }
-    .wedding-datetime-notice p {
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 4px;
-    }
-
-    /* 2. 웨딩 달력 박스 */
-    .wedding-calendar-container {
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto 20px auto;
-      display: block; /* 옆 영역 침범 방지 */
-      background: #fff;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-
-    /* 3. 피로연 식사 시간 안내 박스 (독립 블록화) */
-    #custom-meal-notice-box {
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto 30px auto;
-      padding: 15px;
-      background-color: #f2ede9; /* 차분하고 고급스러운 베이지톤 배경 */
-      border-radius: 8px;
-      display: block; /* 플렉스 내부에서 수평 정렬을 파괴하고 한 줄 다 차지함 */
-      text-align: center;
-    }
-    #custom-meal-notice-box .notice-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #7a5f53;
-      margin-bottom: 4px;
-    }
-    #custom-meal-notice-box .notice-text {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.4;
-    }
-
-    /* 4. 카운트다운 타이머 그리드 스타일 */
-    .countdown-grid {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      width: 100%;
-      max-width: 360px;
-    }
-    .countdown-item {
-      flex: 1;
-      background: #fff;
-      padding: 10px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .countdown-number {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #444;
-    }
-    .countdown-unit {
-      font-size: 0.7rem;
-      color: #999;
-      text-transform: uppercase;
-    }
-    .countdown-dday {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #b39283;
-      margin-bottom: 25px;
-    }
-    .countdown-calendar-buttons {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      max-width: 360px;
-    }
-    .btn-calendar {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #e1e1e1;
-      background: #fff;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      color: #666;
-      cursor: pointer;
-    }
-
-    /* 나머지 섹션용 간이 스타일 */
-    .contact-group, .account-group { margin-bottom: 15px; width: 100%; }
-    .account-group-toggle { width: 100%; padding: 12px; background: #fcfcfc; border: 1px solid #eaeaea; border-radius: 6px; text-align: left; font-size: 0.95rem; cursor: pointer; }
-    .location-info { margin-bottom: 20px; text-align: left; padding: 0 10px; }
-    .location-venue-name { font-size: 1.1rem; font-weight: 600; color: #333; }
-    .location-actions { display: flex; gap: 8px; margin-top: 15px; justify-content: center; }
-    .location-actions button, .location-actions a { padding: 10px 16px; background: #fff; border: 1px solid #ddd; border-radius: 6px; font-size: 0.85rem; color: #444; text-decoration: none; cursor: pointer; }
-    .footer { padding: 40px 20px; background: #fafafa; border-top: 1px solid #f0f0f0; color: #999; font-size: 0.8rem; }
-  </style>
-</head>
-<body>
-
-  <div id="curtain-overlay" class="curtain-overlay" style="display: none;">
-    <div class="curtain-content">
-      <div class="curtain-names">이현우 ♥ 강신애</div>
-      <div class="curtain-date">2026. 08. 08</div>
-      <button id="curtain-open-btn" class="curtain-btn">모시는 글 보기</button>
-    </div>
-  </div>
-
-  <div class="wrapper">
-    
-    <section class="hero">
-      <img src="images/hero.jpg" alt="웨딩 메인 이미지" class="hero-image">
-      <div class="hero-overlay">
-        <div class="hero-names">이현우 & 강신애</div>
-        <div class="hero-date">2026년 8월 8일 오후 2시</div>
-        <div class="hero-venue">한국기독교연합회관 연합웨딩홀</div>
-      </div>
-    </section>
-
-    <section class="section invitation fade-in">
-      <div class="section-label">Invitation</div>
-      <h2 class="section-title">소중한 분들을 초대합니다</h2>
-      <div class="section-divider"></div>
-      <p class="invitation-message">
-        서로가 마주보며 다져온 사랑을<br>
-        이제 함께 한 곳을 바라보며 걸어가고자 합니다.<br>
-        저희의 출발 자리에 오셔서 축복해 주시면 감사하겠습니다.
-      </p>
-    </section>
-
-    <section class="section countdown fade-in">
-      <div class="section-label">Countdown</div>
-      <h2 class="section-title">소중한 날</h2>
-      <div class="section-divider"></div>
-      
-      <div class="wedding-datetime-notice">
-        <h3>2026년 8월 8일 토요일 오후 2시</h3>
-        <p>한국기독교연합회관 3층 연합웨딩홀</p>
-      </div>
-      
-      <div class="wedding-calendar-container">
-        </div>
-
-      <div id="custom-meal-notice-box">
-        <div class="notice-title">💡 피로연 식사 시간 안내</div>
-        <div class="notice-text">당일 오전 11시 30분부터 연회장에서 정성 가득한 식사가 제공됩니다.</div>
-      </div>
-
-      <div class="countdown-grid">
-        <div class="countdown-item">
-          <div id="cd-days" class="countdown-number">0</div>
-          <div class="countdown-unit">Days</div>
-        </div>
-        <div class="countdown-item">
-          <div id="cd-hours" class="countdown-number">0</div>
-          <div class="countdown-unit">Hours</div>
-        </div>
-        <div class="countdown-item">
-          <div id="cd-mins" class="countdown-number">0</div>
-          <div class="countdown-unit">Mins</div>
-        </div>
-        <div class="countdown-item">
-          <div id="cd-secs" class="countdown-number">0</div>
-          <div class="countdown-unit">Secs</div>
-        </div>
-      </div>
-      
-      <div class="countdown-dday">저희 결혼식이 소중한 날만큼 남았습니다.</div>
-      
-      <div class="countdown-calendar-buttons">
-        <button id="btn-gcal" class="btn-calendar">구글 캘린더 등록</button>
-        <button id="btn-ical" class="btn-calendar">iCal 캘린더 등록</button>
-      </div>
-    </section>
-
-    <section class="section story fade-in">
-      <div class="story-header">
-        <div class="section-label">Our Story</div>
-        <h2 id="story-title" class="section-title">우리의 이야기</h2>
-        <div class="section-divider"></div>
-      </div>
-      <p class="story-content">만남이 인연이 되고, 인연이 사랑이 되어 마침내 결실을 맺습니다.</p>
-    </section>
-
-    <section class="section gallery fade-in">
-      <div class="gallery-header">
-        <div class="section-label">Gallery</div>
-        <h2 class="section-title">우리의 아름다운 순간</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="gallery-grid"></div>
-      <div class="gallery-more">
-        <button class="btn-gallery-more">더보기</button>
-      </div>
-    </section>
-
-    <section class="section account fade-in">
-      <div class="account-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">축하 연락하기</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div id="contact-groom" class="contact-group">
-        <button class="account-group-toggle">신랑측 연락처</button>
-      </div>
-      <div id="contact-bride" class="contact-group">
-        <button class="account-group-toggle">신부측 연락처</button>
-      </div>
-    </section>
-
-    <section class="section location fade-in">
-      <div class="location-header">
-        <div class="section-label">Location</div>
-        <h2 class="section-title">오시는 길</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="location-info">
-        <div class="location-venue-name">한국기독교연합회관</div>
-        <div class="location-venue-hall">연합웨딩홀</div>
-        <div class="location-address">서울특별시 종로구 김상옥로 30</div>
-        <div class="location-tel">02-708-4114</div>
-      </div>
-      <div class="location-actions">
-        <button id="btn-copy-address">주소 복사</button>
-        <a id="link-kakao-map" href="#" target="_blank">카카오맵</a>
-        <a id="link-naver-map" href="#" target="_blank">네이버지도</a>
-      </div>
-    </section>
-
-    <section class="section account fade-in">
-      <div class="account-header">
-        <div class="section-label">Registry</div>
-        <h2 class="section-title">마음 전하실 곳</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div id="account-groom" class="account-group">
-        <button class="account-group-toggle">신랑측 계좌</button>
-      </div>
-      <div id="account-bride" class="account-group">
-        <button class="account-group-toggle">신부측 계좌</button>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <p class="footer-text">© 2026. Groom & Bride All rights reserved.</p>
-    </footer>
-  </div>
-
-  <script src="config.js?v=1.5"></script>
-  <script src="script.js?v=1.5"></script>
-</body>
-</html>
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40
