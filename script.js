@@ -590,7 +590,7 @@
     }
   }
 
-  // ── Account ──
+  // ── Account (하객의 편의를 위해 숫자만 복사하도록 수정한 영역) ──
   function buildAccount(c) {
     if (c.accounts?.groom) buildAccountGroup('groom', c.accounts.groom, `신랑측 계좌번호`);
     if (c.accounts?.bride) buildAccountGroup('bride', c.accounts.bride, `신부측 계좌번호`);
@@ -619,8 +619,11 @@
     }
 
     if (list) {
-      list.innerHTML = accounts.map(acc =>
-        `<div class="account-item">
+      list.innerHTML = accounts.map(acc => {
+        // [핵심 변경] 정규식을 이용해 계좌 정보 중 순수 숫자와 하이픈(-)만 남깁니다.
+        const cleanAccountNumber = acc.number.replace(/[^0-9-]/g, '');
+
+        return `<div class="account-item">
           <div class="account-info">
             <div class="account-role">${acc.role}</div>
             <div class="account-detail">
@@ -628,9 +631,9 @@
               ${acc.bank} ${acc.number}
             </div>
           </div>
-          <button class="btn-copy-account" data-copy="${acc.bank} ${acc.number} ${acc.name}">복사</button>
-        </div>`
-      ).join('');
+          <button class="btn-copy-account" data-copy="${cleanAccountNumber}">복사</button>
+        </div>`;
+      }).join('');
 
       $$('.btn-copy-account', list).forEach(btn => {
         btn.addEventListener('click', () => {
