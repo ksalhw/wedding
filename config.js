@@ -70,14 +70,14 @@ const CONFIG = {
   contacts: {
     groom: [
       
-      { role: "아버지", name: "이종성", tel: "010-0000-0000" },
-      { role: "어머니", name: "김현숙", tel: "010-0000-0000" },
-      { role: "신랑", name: "이현우", tel: "010-0000-0000" }
+      { role: "아버지", name: "이종성", tel: "010-9936-4791" },
+      { role: "어머니", name: "김현숙", tel: "010-5191-4791" },
+      { role: "신랑", name: "이현우", tel: "010-4400-9174" }
     ],
     bride: [
-      { role: "아버지", name: "강주봉", tel: "010-0000-0000" },
-      { role: "어머니", name: "이상은", tel: "010-0000-0000" },
-      { role: "신부", name: "강신애", tel: "010-0000-0000" }
+      { role: "아버지", name: "강주봉", tel: "010-4721-2285" },
+      { role: "어머니", name: "이상은", tel: "010-8277-1690" },
+      { role: "신부", name: "강신애", tel: "010-2823-2285" }
     ]
   },
 
@@ -85,14 +85,14 @@ const CONFIG = {
   // ── 마음 전하실 곳 ──
   accounts: {
     groom: [
-      { role: "아버지", name: "이종성", bank: "OO은행", number: "000-000-000000" },
-      { role: "어머니", name: "김현숙", bank: "OO은행", number: "000-000-000000" },
-      { role: "신랑", name: "이현우", bank: "OO은행", number: "000-000-000000" }
+      { role: "아버지", name: "이종성", bank: "우체국", number: "31007802250229" },
+      { role: "어머니", name: "김현숙", bank: "카카오뱅크", number: "3333135929876" },
+      { role: "신랑", name: "이현우", bank: "우리은행", number: "1002444408048" }
     ],
     bride: [
-      { role: "아버지", name: "강주봉", bank: "OO은행", number: "000-000-000000" },
-      { role: "어머니", name: "이상은", bank: "OO은행", number: "000-000-000000" },
-      { role: "신부", name: "강신애", bank: "OO은행", number: "000-000-000000" }
+      { role: "아버지", name: "강주봉", bank: "기업은행", number: "16908943601032" },
+      { role: "어머니", name: "이상은", bank: "새마을금고", number: "9003253653890" },
+      { role: "신부", name: "강신애", bank: "하나은행", number: "21289204369807" }
     ]
   },
 
