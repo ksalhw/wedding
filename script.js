@@ -266,16 +266,6 @@
       countdownSection.insertBefore(calendarWrapper, buttonsWrapper);
     }
 
-    const receptionNotice = $('.reception-notice');
-    if (receptionNotice) {
-      receptionNotice.innerHTML = `
-        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 0.85rem; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
-          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
-          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
-        </div>
-      `;
-    }
-
     const [h, m] = c.wedding.time.split(':').map(Number);
     const weddingDate = new Date(dateInfo.date);
     weddingDate.setHours(h, m, 0, 0);
