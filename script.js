@@ -165,6 +165,7 @@
     if (galleryGrid) galleryGrid.classList.add('loading');
   }
 
+  // ── Hide Loading State ──
   function hideLoadingState() {
     const storyImagesEl = $('.story-images');
     const galleryGrid = $('.gallery-grid');
@@ -503,12 +504,17 @@
     updateModalImage();
   }
 
+  // 이미지 교체 시 스르륵 자연스럽게 넘어가는 효과 구현 영역
   function updateModalImage() {
     const img = $('.modal-image');
     const counter = $('.modal-counter');
     if (img) {
-      img.src = currentModalImages[currentModalIndex];
-      img.alt = `Photo ${currentModalIndex + 1}`;
+      img.style.opacity = '0'; // 투명하게 만듦
+      setTimeout(() => {
+        img.src = currentModalImages[currentModalIndex];
+        img.alt = `Photo ${currentModalIndex + 1}`;
+        img.style.opacity = '1'; // 소스를 바꾼 후 부드럽게 밝아짐
+      }, 150); // 0.15초 뒤 교체 실행
     }
     if (counter) {
       counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
@@ -597,7 +603,7 @@
     }
   }
 
-  // ── Account (하객의 편의를 위해 숫자만 복사하도록 수정한 영역) ──
+  // ── Account ──
   function buildAccount(c) {
     if (c.accounts?.groom) buildAccountGroup('groom', c.accounts.groom, `신랑측 계좌번호`);
     if (c.accounts?.bride) buildAccountGroup('bride', c.accounts.bride, `신부측 계좌번호`);
