@@ -1,5 +1,5 @@
 /* ==========================================
-   📸 갤러리 모달 스르륵 효과 & 모바일 화살표 활성화
+   📸 갤러리 모달 (안전 버전 - 화면 깨짐 방지)
    ========================================== */
 
 .modal-overlay {
@@ -8,19 +8,20 @@
   background: rgba(0, 0, 0, 0.95);
   z-index: 1000;
   
-  /* display: none 대신 투명도와 pointer-events로 제어하여 '스르륵' 애니메이션 보장 */
-  display: flex;
+  /* 자바스크립트의 display 제어와 호환되도록 기존 기본 구조 유지 */
+  display: none; 
   align-items: center;
   justify-content: center;
+  
+  /* 부드러운 스르륵 페이드인 효과 */
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.3s ease;
 }
 
-/* 모달이 활성화되었을 때 부드럽게 나타남 */
+/* 스크립트에 의해 display: flex와 active가 동시에 붙을 때 스르륵 나타남 */
 .modal-overlay.active {
+  display: flex !important;
   opacity: 1;
-  pointer-events: auto;
 }
 
 .modal-close {
@@ -35,14 +36,10 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 26px;
+  font-size: 24px;
   z-index: 10;
   opacity: 0.7;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.modal-close:active {
-  transform: scale(0.9);
+  transition: opacity 0.2s;
 }
 
 .modal-counter {
@@ -70,58 +67,46 @@
 
 .modal-image {
   max-width: 100%;
-  max-height: 85vh;
-  max-height: 85svh;
+  max-height: 90vh;
+  max-height: 90svh;
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
   
-  /* 이미지가 교체될 때 툭 바뀌지 않고 스르륵 바뀌도록 트랜지션 추가 */
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  /* 사진이 넘어갈 때의 부드러운 애니메이션 효과 */
+  transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
-/* ⚠️ [중요] 모바일에서도 화살표가 터치하기 쉽도록 크기와 패딩을 최적화하여 상시 노출 */
+/* ⚠️ [핵심 수정] 모바일/PC 모두 화살표가 항상 폰트 크기 및 위치가 깨지지 않게 고정 */
 .modal-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 24px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.3); /* 모바일 이미지 위에서도 잘 보이도록 반투명 배경 추가 */
+  transition: all 0.2s;
+  background: rgba(0, 0, 0, 0.2); /* 모바일에서 사진 흰 배경에 화살표 묻힘 방지 */
   border-radius: 50%;
-  transition: all 0.2s ease;
-  -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 푸른 잔상 제거 */
 }
 
-.modal-nav:active {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+.modal-nav:hover { 
+  color: #fff; 
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* PC 마우스 오버 대응 */
-@media (min-width: 768px) {
-  .modal-nav {
-    background: transparent;
-    font-size: 28px;
-  }
-  .modal-nav:hover {
-    color: #fff;
-    transform: translateY(-50%) scale(1.1);
-  }
-}
+.modal-prev { left: 8px; }
+.modal-next { right: 8px; }
 
-.modal-prev { left: 12px; }
-.modal-next { right: 12px; }
-
-/* 🚨 기존에 있던 @media (max-width: 767px) { .modal-nav { display: none; } } 구역은 완전히 지우거나 아래처럼 비워두세요 */
+/* 🚨 기존에 모바일에서 화살표를 통째로 지워버리던 display: none 제거 🚨 */
 @media (max-width: 767px) {
-  /* 모바일 네비게이션 숨김 처리를 제거하여 화살표가 정상적으로 작동합니다. */
+  .modal-nav {
+    /* 기존의 display: none; 을 삭제하여 모바일에서도 정상 노출되게 만듭니다. */
+    display: flex; 
+  }
 }
