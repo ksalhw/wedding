@@ -503,7 +503,6 @@
     updateModalImage(true); 
   }
 
-  // ── [개선 및 버그 해결] 크기가 다른 이미지 간 전환 시 엑스박스나 외곽선 줄/잔상 차단 ──
   function updateModalImage(useFade = true) {
     const img = $('.modal-image');
     const counter = $('.modal-counter');
@@ -512,27 +511,21 @@
     const nextSrc = currentModalImages[currentModalIndex];
 
     if (useFade) {
-      // 1단계: 기존 이미지를 서서히 어둡게 가려줍니다.
       img.classList.add('fade');
 
-      // 2단계: 어두워진 상태에서 백그라운드에 새 이미지를 미리 로드시킵니다.
       setTimeout(() => {
         const tempImg = new Image();
         tempImg.onload = () => {
-          // 백그라운드 로드가 완전히 완료되었을 때만 실제 화면 요소를 교체합니다.
-          // 이로 인해 크기 변화로 인한 하단 잔상이나 빈 줄이 생기지 않습니다.
           img.src = nextSrc;
           img.alt = `Photo ${currentModalIndex + 1}`;
           if (counter) {
             counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
           }
-          // 3단계: 새 이미지가 올바르게 박혔으므로 투명도를 걷어내 선명하게 보이도록 합니다.
           img.classList.remove('fade');
         };
         tempImg.src = nextSrc;
       }, 250);
     } else {
-      // 모달창을 최초로 오픈할 때는 딜레이 없이 즉시 표출합니다.
       img.classList.remove('fade');
       img.src = nextSrc;
       img.alt = `Photo ${currentModalIndex + 1}`;
@@ -721,3 +714,21 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
   }
 });
+
+// 모달 이미지 테두리선 및 잔상 실선 완전 박멸 스타일
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .modal-overlay,
+    .modal-swipe-area,
+    .modal-image, 
+    .modal-swipe-area img, 
+    .modal-overlay img {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: transparent !important;
+    }
+  `;
+  document.head.appendChild(style);
+})();
