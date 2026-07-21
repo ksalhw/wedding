@@ -715,22 +715,30 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// 모달 이미지 렌더링 시 발생하는 위아래 미세 픽셀 경계선/테두리 완벽 차단
+// 모달 전체 레이아웃의 흰색 테두리 및 이미지 외곽선 강제 제거
 (function() {
   const style = document.createElement('style');
   style.textContent = `
+    .modal-overlay,
+    .modal-content,
+    .modal-swipe-area {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
     .modal-image, 
     img.modal-image,
-    .modal-overlay .modal-image {
-      display: block !important;       /* 인라인 요소 특성의 여백 차단 */
-      vertical-align: middle !important;/* 브라우저 기본 정렬선 초기화 */
-      border: 0px none transparent !important;
+    .modal-overlay img {
+      display: block !important;
+      vertical-align: middle !important;
+      border: none !important;
       outline: none !important;
       box-shadow: none !important;
       -webkit-box-shadow: none !important;
       max-height: 80vh !important;
       object-fit: contain !important;
-      margin: 0 auto !important;       /* 중앙 정렬 보장 */
+      margin: 0 auto !important;
+      background: transparent !important;
     }
   `;
   document.head.appendChild(style);
