@@ -1024,35 +1024,36 @@ html body .wrapper .wedding-calendar .calendar-grid span.day-num.wedding-day > s
 .wedding-meal-info strong {
   color: #e54d42;
   font-weight: 500;
-}/* ==========================================
-   모달창 흰색 외곽선 및 배경 틀 강제 제거 수정
-   ========================================== */
-.modal-overlay,
-.modal-overlay *,
-.modal-content,
-.modal-swipe-area {
-  background-color: transparent !important;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
+}
+/* ==========================================
+   모달창 외곽선 및 배경 틀 깔끔하게 정리 (수정본)
+   ========================================== */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.modal-overlay {
-  background: rgba(0, 0, 0, 0.95) !important; /* 배경 어두운 효과만 유지 */
+.modal-swipe-area,
+.modal-content {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .modal-image,
 img.modal-image {
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  max-width: 100% !important;
-  max-height: 85vh !important;
-  object-fit: contain !important;
-  display: block !important;
-  margin: 0 auto !important;
-} 
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  max-width: 100% !important;
+  max-height: 85vh !important;
+  max-height: 85svh !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
