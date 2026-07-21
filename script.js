@@ -199,8 +199,9 @@
   // ── Invitation ──
   function buildInvitation(c, dateInfo, timeText) {
     const msg = $('.invitation-message');
-    if (msg) {
-      msg.textContent = c.invitation.message;
+    if (msg && c.invitation.message) {
+      // 줄바꿈 문자(\n)가 무시되지 않도록 br 태그 처리 적용
+      msg.innerHTML = c.invitation.message.replace(/\n/g, '<br>');
     }
 
     const parents = $('.invitation-parents');
@@ -224,9 +225,13 @@
   // ── Countdown & Calendar ──
   function buildCountdown(c, dateInfo) {
     const countdownSection = $('.section.countdown');
-    if (countdownSection) {
+    const buttonsWrapper = $('.countdown-calendar-buttons');
+    
+    if (countdownSection && buttonsWrapper) {
       const calendarWrapper = document.createElement('div');
       calendarWrapper.className = 'wedding-calendar';
+      calendarWrapper.style.width = '100%';
+      calendarWrapper.style.order = '0'; // 안내 문구 밑, 버튼들 위에 자연스럽게 위치 지정
       
       const year = dateInfo.date.getFullYear();
       const month = dateInfo.date.getMonth();
@@ -259,7 +264,19 @@
         </div>
       `;
       
-      countdownSection.insertBefore(calendarWrapper, countdownSection.firstChild);
+      // 구조 붕괴를 막기 위해 버튼 영역 직전에 달력을 삽입합니다.
+      countdownSection.insertBefore(calendarWrapper, buttonsWrapper);
+    }
+
+    // 피로연 식사 안내 바인딩 (존재하지 않는 ID 에러 방지 및 HTML 요소 매핑)
+    const receptionNotice = $('.reception-notice');
+    if (receptionNotice) {
+      receptionNotice.innerHTML = `
+        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 0.85rem; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
+          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
+          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
+        </div>
+      `;
     }
 
     const [h, m] = c.wedding.time.split(':').map(Number);
@@ -359,7 +376,10 @@
     if (title) title.textContent = c.story.title;
 
     const content = $('.story-content');
-    if (content) content.textContent = c.story.content;
+    if (content && c.story.content) {
+      // 스토리가 길어져 화면 밖으로 밀리지 않도록 줄바꿈 처리
+      content.innerHTML = c.story.content.replace(/\n/g, '<br>');
+    }
   }
 
   // ── Story Images ──
@@ -484,7 +504,7 @@
     const overlay = $('.modal-overlay');
     if (!overlay) return;
 
-    updateModalImage(false); 
+    updateModalImage();
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -500,38 +520,18 @@
     currentModalIndex += dir;
     if (currentModalIndex < 0) currentModalIndex = currentModalImages.length - 1;
     if (currentModalIndex >= currentModalImages.length) currentModalIndex = 0;
-    updateModalImage(true); 
+    updateModalImage();
   }
 
-  function updateModalImage(useFade = true) {
+  function updateModalImage() {
     const img = $('.modal-image');
     const counter = $('.modal-counter');
-    if (!img) return;
-
-    const nextSrc = currentModalImages[currentModalIndex];
-
-    if (useFade) {
-      img.classList.add('fade');
-
-      setTimeout(() => {
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          img.src = nextSrc;
-          img.alt = `Photo ${currentModalIndex + 1}`;
-          if (counter) {
-            counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
-          }
-          img.classList.remove('fade');
-        };
-        tempImg.src = nextSrc;
-      }, 250);
-    } else {
-      img.classList.remove('fade');
-      img.src = nextSrc;
+    if (img) {
+      img.src = currentModalImages[currentModalIndex];
       img.alt = `Photo ${currentModalIndex + 1}`;
-      if (counter) {
-        counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
-      }
+    }
+    if (counter) {
+      counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
     }
   }
 
@@ -698,48 +698,4 @@
   } else {
     init();
   }
-})();
-
-document.addEventListener("DOMContentLoaded", function() {
-  const noticeBox = document.getElementById("custom-meal-notice-box");
-  if (noticeBox) {
-    noticeBox.innerHTML = `
-      <div class="wedding-schedule-bottom" style="text-align: center; margin: 24px auto 32px auto; padding: 0 16px;">
-        <div class="wedding-time-highlight" style="font-size: 16px; font-weight: 600; color: #111; margin-bottom: 12px;">2026년 8월 8일 토요일 오후 2시</div>
-        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 13px; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
-          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
-          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
-        </div>
-      </div>
-    `;
-  }
-});
-
-// 모달 전체 레이아웃의 흰색 테두리 및 이미지 외곽선 강제 제거
-(function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .modal-overlay,
-    .modal-content,
-    .modal-swipe-area {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    .modal-image, 
-    img.modal-image,
-    .modal-overlay img {
-      display: block !important;
-      vertical-align: middle !important;
-      border: none !important;
-      outline: none !important;
-      box-shadow: none !important;
-      -webkit-box-shadow: none !important;
-      max-height: 80vh !important;
-      object-fit: contain !important;
-      margin: 0 auto !important;
-      background: transparent !important;
-    }
-  `;
-  document.head.appendChild(style);
 })();
