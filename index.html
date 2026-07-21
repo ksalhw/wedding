@@ -1,210 +1,211 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>모바일 청첩장</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>모바일 청첩장</title>
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="이현우 ♥ 강신애 결혼식에 초대합니다.">
-  <meta property="og:description" content="2026년 8월 8일 오후 14시 한국기독교연합회관 연합웨딩홀">
-  <meta property="og:image" content="images/og/1.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="이현우 ♥ 강신애 결혼식에 초대합니다.">
+  <meta property="og:description" content="2026년 8월 8일 오후 14시 한국기독교연합회관 연합웨딩홀">
+  <meta property="og:image" content="images/og/1.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-  
-  <link rel="stylesheet" href="styles.css?v=1.2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  
+  <link rel="stylesheet" href="styles.css?v=1.2">
 </head>
 <body>
 
-  <div id="curtain-overlay" class="curtain-overlay" style="display: none;">
-    <div class="curtain-content">
-      <div class="curtain-names"></div>
-      <div class="curtain-date"></div>
-      <button id="curtain-open-btn" class="curtain-btn">모시는 글 보기</button>
-    </div>
-  </div>
+  <div id="curtain-overlay" class="curtain-overlay" style="display: none;">
+    <div class="curtain-content">
+      <div class="curtain-names"></div>
+      <div class="curtain-date"></div>
+      <button id="curtain-open-btn" class="curtain-btn">모시는 글 보기</button>
+    </div>
+  </div>
 
-  <div class="wrapper">
-    
-    <section class="hero">
-      <img src="" alt="" class="hero-image">
-      <div class="hero-overlay">
-        <div class="hero-names"></div>
-        <div class="hero-date"></div>
-        <div class="hero-venue"></div>
-      </div>
-      <div class="hero-scroll"></div>
-    </section>
+  <div class="wrapper">
+    
+    <section class="hero">
+      <img src="" alt="" class="hero-image">
+      <div class="hero-overlay">
+        <div class="hero-names"></div>
+        <div class="hero-date"></div>
+        <div class="hero-venue"></div>
+      </div>
+      <div class="hero-scroll"></div>
+    </section>
 
-    <section class="section invitation fade-in">
-      <div class="section-label">Invitation</div>
-      <h2 class="section-title">소중한 분들을 초대합니다</h2>
-      <div class="section-divider"></div>
-      <p class="invitation-message"></p>
-      <div class="invitation-parents"></div>
-    </section>
+    <section class="section invitation fade-in">
+      <div class="section-label">Invitation</div>
+      <h2 class="section-title">소중한 분들을 초대합니다</h2>
+      <div class="section-divider"></div>
+      <p class="invitation-message"></p>
+      <div class="invitation-parents"></div>
+    </section>
 
-    <section class="section countdown fade-in" style="display: flex; flex-direction: column;">
-      
-      <div class="wedding-notice-wrapper" style="order: -2; text-align: center; width: 100%;">
-        <div class="section-label" style="margin-bottom: 10px;">Our Wedding Day</div>
-        
-        <div class="wedding-datetime-notice" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: #333;">
-          2026년 8월 8일 오후 2시
-        </div>
+    <section class="section countdown fade-in" style="display: flex; flex-direction: column;">
+      
+      <div class="wedding-notice-wrapper" style="order: -2; text-align: center; width: 100%;">
+        <div class="section-label" style="margin-bottom: 10px;">Our Wedding Day</div>
+        
+        <div class="wedding-datetime-notice" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: #333;">
+          2026년 8월 8일 오후 2시
+        </div>
 
-        <div class="reception-notice" style="font-size: 0.95rem; line-height: 1.6; color: #666; margin-bottom: 25px; word-break: keep-all; padding: 0 20px;">
-          
-        </div>
-      </div>
+        <div class="reception-notice" style="font-size: 0.95rem; line-height: 1.6; color: #666; margin-bottom: 25px; word-break: keep-all; padding: 0 20px;">
+          
+        </div>
+      </div>
 
-      <div class="countdown-calendar-buttons" style="order: 1; margin-top: 20px; margin-bottom: 25px;">
-        <button id="btn-gcal" class="btn-calendar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          구글 캘린더 등록
-        </button>
-        <button id="btn-ical" class="btn-calendar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          iCal 캘린더 등록
-        </button>
-      </div>
+      <!-- 버튼이 양옆으로 나란히 예쁘게 정렬되도록 display 설정을 추가했습니다 -->
+      <div class="countdown-calendar-buttons" style="order: 1; margin-top: 20px; margin-bottom: 25px; display: flex; gap: 10px; justify-content: center; width: 100%;">
+        <button id="btn-gcal" class="btn-calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          구글 캘린더 등록
+        </button>
+        <button id="btn-ical" class="btn-calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          iCal 캘린더 등록
+        </button>
+      </div>
 
-      <div class="countdown-content-bottom" style="order: 2;">
-        <div class="countdown-dday" style="margin-bottom: 15px;"></div>
-        <div class="countdown-grid">
-          <div class="countdown-item">
-            <div id="cd-days" class="countdown-number">0</div>
-            <div class="countdown-unit">Days</div>
-          </div>
-          <div class="countdown-item">
-            <div id="cd-hours" class="countdown-number">0</div>
-            <div class="countdown-unit">Hours</div>
-          </div>
-          <div class="countdown-item">
-            <div id="cd-mins" class="countdown-number">0</div>
-            <div class="countdown-unit">Mins</div>
-          </div>
-          <div class="countdown-item">
-            <div id="cd-secs" class="countdown-number">0</div>
-            <div class="countdown-unit">Secs</div>
-          </div>
-        </div>
-      </div>
-      
-    </section>
+      <div class="countdown-content-bottom" style="order: 2;">
+        <div class="countdown-dday" style="margin-bottom: 15px;"></div>
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <div id="cd-days" class="countdown-number">0</div>
+            <div class="countdown-unit">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div id="cd-hours" class="countdown-number">0</div>
+            <div class="countdown-unit">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div id="cd-mins" class="countdown-number">0</div>
+            <div class="countdown-unit">Mins</div>
+          </div>
+          <div class="countdown-item">
+            <div id="cd-secs" class="countdown-number">0</div>
+            <div class="countdown-unit">Secs</div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
 
-    <section class="section story fade-in">
-      <div class="story-header">
-        <div class="section-label">Our Story</div>
-        <h2 id="story-title" class="section-title"></h2>
-        <div class="section-divider"></div>
-      </div>
-      <p class="story-content"></p>
-      <div class="story-images"></div>
-    </section>
+    <section class="section story fade-in">
+      <div class="story-header">
+        <div class="section-label">Our Story</div>
+        <h2 id="story-title" class="section-title"></h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="story-content"></p>
+      <div class="story-images"></div>
+    </section>
 
-    <section class="section gallery fade-in">
-      <div class="gallery-header">
-        <div class="section-label">Gallery</div>
-        <h2 class="section-title">갤러리</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="gallery-grid"></div>
-      <div class="gallery-more">
-        <button class="btn-gallery-more">더보기</button>
-      </div>
-    </section>
+    <section class="section gallery fade-in">
+      <div class="gallery-header">
+        <div class="section-label">Gallery</div>
+        <h2 class="section-title">갤러리</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="gallery-grid"></div>
+      <div class="gallery-more">
+        <button class="btn-gallery-more">더보기</button>
+      </div>
+    </section>
 
-    <section class="section account fade-in">
-      <div class="account-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">축하 연락하기</h2>
-        <div class="section-divider"></div>
-      </div>
+    <section class="section account fade-in">
+      <div class="account-header">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">축하 연락하기</h2>
+        <div class="section-divider"></div>
+      </div>
 
-      <div id="contact-groom" class="contact-group">
-        <button class="account-group-toggle">
-          <span class="toggle-label">신랑측 연락처</span>
-          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="contact-list"></div>
-      </div>
+      <div id="contact-groom" class="contact-group">
+        <button class="account-group-toggle">
+          <span class="toggle-label">신랑측 연락처</span>
+          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="contact-list"></div>
+      </div>
 
-      <div id="contact-bride" class="contact-group">
-        <button class="account-group-toggle">
-          <span class="toggle-label">신부측 연락처</span>
-          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="contact-list"></div>
-      </div>
-    </section>
+      <div id="contact-bride" class="contact-group">
+        <button class="account-group-toggle">
+          <span class="toggle-label">신부측 연락처</span>
+          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="contact-list"></div>
+      </div>
+    </section>
 
-    <section class="section location fade-in">
-      <div class="location-header">
-        <div class="section-label">Location</div>
-        <h2 class="section-title">오시는 길</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="location-info">
-        <div class="location-venue-name"></div>
-        <div class="location-venue-hall"></div>
-        <div class="location-address"></div>
-        <div class="location-tel"></div>
-      </div>
-      <div class="location-map-image">
-        <img src="" alt="">
-      </div>
-      <div class="location-actions">
-        <button id="btn-copy-address">주소 복사하기</button>
-        <a id="link-kakao-map" href="#" target="_blank">카카오맵</a>
-        <a id="link-naver-map" href="#" target="_blank">네이버지도</a>
-      </div>
-    </section>
+    <section class="section location fade-in">
+      <div class="location-header">
+        <div class="section-label">Location</div>
+        <h2 class="section-title">오시는 길</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="location-info">
+        <div class="location-venue-name"></div>
+        <div class="location-venue-hall"></div>
+        <div class="location-address"></div>
+        <div class="location-tel"></div>
+      </div>
+      <div class="location-map-image">
+        <img src="" alt="">
+      </div>
+      <div class="location-actions">
+        <button id="btn-copy-address">주소 복사하기</button>
+        <a id="link-kakao-map" href="#" target="_blank">카카오맵</a>
+        <a id="link-naver-map" href="#" target="_blank">네이버지도</a>
+      </div>
+    </section>
 
-    <section class="section account fade-in">
-      <div class="account-header">
-        <div class="section-label">Registry</div>
-        <h2 class="section-title">마음 전하실 곳</h2>
-        <div class="section-divider"></div>
-      </div>
+    <section class="section account fade-in">
+      <div class="account-header">
+        <div class="section-label">Registry</div>
+        <h2 class="section-title">마음 전하실 곳</h2>
+        <div class="section-divider"></div>
+      </div>
 
-      <div id="account-groom" class="account-group">
-        <button class="account-group-toggle">
-          <span class="toggle-label">신랑측 계좌번호</span>
-          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="account-list"></div>
-      </div>
+      <div id="account-groom" class="account-group">
+        <button class="account-group-toggle">
+          <span class="toggle-label">신랑측 계좌번호</span>
+          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="account-list"></div>
+      </div>
 
-      <div id="account-bride" class="account-group">
-        <button class="account-group-toggle">
-          <span class="toggle-label">신부측 계좌번호</span>
-          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="account-list"></div>
-      </div>
-    </section>
+      <div id="account-bride" class="account-group">
+        <button class="account-group-toggle">
+          <span class="toggle-label">신부측 계좌번호</span>
+          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="account-list"></div>
+      </div>
+    </section>
 
-    <footer class="footer">
-      <p class="footer-text">© 2026. HYUNWOO & SINAE All rights reserved.</p>
-    </footer>
+    <footer class="footer">
+      <p class="footer-text">© 2026. HYUNWOO & SINAE All rights reserved.</p>
+    </footer>
 
-  </div>
+  </div>
 
-  <div class="modal-overlay">
-    <button class="modal-close" aria-label="닫기">✕</button>
-    <div class="modal-swipe-area">
-      <img src="" alt="" class="modal-image">
-    </div>
-    <button class="modal-nav modal-prev" aria-label="이전 사진">❮</button>
-    <button class="modal-nav modal-next" aria-label="다음 사진">❯</button>
-    <div class="modal-counter"></div>
-  </div>
+  <div class="modal-overlay">
+    <button class="modal-close" aria-label="닫기">✕</button>
+    <div class="modal-swipe-area">
+      <img src="" alt="" class="modal-image">
+    </div>
+    <button class="modal-nav modal-prev" aria-label="이전 사진">❮</button>
+    <button class="modal-nav modal-next" aria-label="다음 사진">❯</button>
+    <div class="modal-counter"></div>
+  </div>
 
-  <script src="config.js?v=1.2"></script>
-  <script src="script.js?v=1.2"></script>
+  <script src="config.js?v=1.2"></script>
+  <script src="script.js?v=1.2"></script>
 </body>
 </html>
