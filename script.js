@@ -200,7 +200,6 @@
   function buildInvitation(c, dateInfo, timeText) {
     const msg = $('.invitation-message');
     if (msg && c.invitation.message) {
-      // 줄바꿈 문자(\n)가 무시되지 않도록 br 태그 처리 적용
       msg.innerHTML = c.invitation.message.replace(/\n/g, '<br>');
     }
 
@@ -231,7 +230,7 @@
       const calendarWrapper = document.createElement('div');
       calendarWrapper.className = 'wedding-calendar';
       calendarWrapper.style.width = '100%';
-      calendarWrapper.style.order = '0'; // 안내 문구 밑, 버튼들 위에 자연스럽게 위치 지정
+      calendarWrapper.style.order = '0';
       
       const year = dateInfo.date.getFullYear();
       const month = dateInfo.date.getMonth();
@@ -264,11 +263,9 @@
         </div>
       `;
       
-      // 구조 붕괴를 막기 위해 버튼 영역 직전에 달력을 삽입합니다.
       countdownSection.insertBefore(calendarWrapper, buttonsWrapper);
     }
 
-    // 피로연 식사 안내 바인딩 (존재하지 않는 ID 에러 방지 및 HTML 요소 매핑)
     const receptionNotice = $('.reception-notice');
     if (receptionNotice) {
       receptionNotice.innerHTML = `
@@ -377,7 +374,6 @@
 
     const content = $('.story-content');
     if (content && c.story.content) {
-      // 스토리가 길어져 화면 밖으로 밀리지 않도록 줄바꿈 처리
       content.innerHTML = c.story.content.replace(/\n/g, '<br>');
     }
   }
@@ -454,7 +450,7 @@
     }
   }
 
-  // ── Photo Modal ──
+  // ── Photo Modal (스르륵 페이드 효과 포함) ──
   let currentModalImages = [];
   let currentModalIndex = 0;
   let touchStartX = 0;
@@ -504,7 +500,7 @@
     const overlay = $('.modal-overlay');
     if (!overlay) return;
 
-    updateModalImage();
+    updateModalImage(false);
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -520,16 +516,28 @@
     currentModalIndex += dir;
     if (currentModalIndex < 0) currentModalIndex = currentModalImages.length - 1;
     if (currentModalIndex >= currentModalImages.length) currentModalIndex = 0;
-    updateModalImage();
+    updateModalImage(true);
   }
 
-  function updateModalImage() {
+  function updateModalImage(withFade = false) {
     const img = $('.modal-image');
     const counter = $('.modal-counter');
-    if (img) {
+    
+    if (!img) return;
+
+    if (withFade) {
+      img.classList.add('fade');
+      setTimeout(() => {
+        img.src = currentModalImages[currentModalIndex];
+        img.alt = `Photo ${currentModalIndex + 1}`;
+        img.classList.remove('fade');
+      }, 200);
+    } else {
+      img.classList.remove('fade');
       img.src = currentModalImages[currentModalIndex];
       img.alt = `Photo ${currentModalIndex + 1}`;
     }
+
     if (counter) {
       counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
     }
