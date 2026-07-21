@@ -469,6 +469,7 @@ a {
   overflow: hidden;
 }
 
+/* 갤러리 사진 스르르 효과 제어를 위해 수정된 영역 */
 .modal-image {
   max-width: 100%;
   max-height: 90vh;
@@ -476,7 +477,14 @@ a {
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
-  transition: transform 0.3s ease;
+  opacity: 1;
+  /* 부드럽게 크기와 투명도가 변하도록 transition 설정 */
+  transition: opacity 0.25s ease-out, transform 0.3s ease; 
+}
+
+/* 이미지 전환 중 투명하게 사라지는 상태 클래스 추가 */
+.modal-image.fade {
+  opacity: 0;
 }
 
 .modal-nav {
