@@ -199,8 +199,8 @@
   // ── Invitation ──
   function buildInvitation(c, dateInfo, timeText) {
     const msg = $('.invitation-message');
-    if (msg && c.invitation.message) {
-      msg.innerHTML = c.invitation.message.replace(/\n/g, '<br>');
+    if (msg) {
+      msg.textContent = c.invitation.message;
     }
 
     const parents = $('.invitation-parents');
@@ -224,13 +224,9 @@
   // ── Countdown & Calendar ──
   function buildCountdown(c, dateInfo) {
     const countdownSection = $('.section.countdown');
-    const buttonsWrapper = $('.countdown-calendar-buttons');
-    
-    if (countdownSection && buttonsWrapper) {
+    if (countdownSection) {
       const calendarWrapper = document.createElement('div');
       calendarWrapper.className = 'wedding-calendar';
-      calendarWrapper.style.width = '100%';
-      calendarWrapper.style.order = '0';
       
       const year = dateInfo.date.getFullYear();
       const month = dateInfo.date.getMonth();
@@ -263,17 +259,7 @@
         </div>
       `;
       
-      countdownSection.insertBefore(calendarWrapper, buttonsWrapper);
-    }
-
-    const receptionNotice = $('.reception-notice');
-    if (receptionNotice) {
-      receptionNotice.innerHTML = `
-        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 0.85rem; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
-          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
-          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
-        </div>
-      `;
+      countdownSection.insertBefore(calendarWrapper, countdownSection.firstChild);
     }
 
     const [h, m] = c.wedding.time.split(':').map(Number);
@@ -373,9 +359,7 @@
     if (title) title.textContent = c.story.title;
 
     const content = $('.story-content');
-    if (content && c.story.content) {
-      content.innerHTML = c.story.content.replace(/\n/g, '<br>');
-    }
+    if (content) content.textContent = c.story.content;
   }
 
   // ── Story Images ──
@@ -567,8 +551,8 @@
 
   // ── Contact ──
   function buildContact(c) {
-    const groomList = c.contacts?.groom || c.contact?.groom;
-    const brideList = c.contacts?.bride || c.contact?.bride;
+    const groomList = c.contact?.groom || c.contacts?.groom;
+    const brideList = c.contact?.bride || c.contacts?.bride;
 
     if (groomList) buildContactGroup('groom', groomList);
     if (brideList) buildContactGroup('bride', brideList);
@@ -613,7 +597,7 @@
     }
   }
 
-  // ── Account ──
+  // ── Account (하객의 편의를 위해 숫자만 복사하도록 수정한 영역) ──
   function buildAccount(c) {
     if (c.accounts?.groom) buildAccountGroup('groom', c.accounts.groom, `신랑측 계좌번호`);
     if (c.accounts?.bride) buildAccountGroup('bride', c.accounts.bride, `신부측 계좌번호`);
@@ -695,3 +679,18 @@
     init();
   }
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const noticeBox = document.getElementById("custom-meal-notice-box");
+  if (noticeBox) {
+    noticeBox.innerHTML = `
+      <div class="wedding-schedule-bottom" style="text-align: center; margin: 24px auto 32px auto; padding: 0 16px;">
+        <div class="wedding-time-highlight" style="font-size: 16px; font-weight: 600; color: #111; margin-bottom: 12px;">2026년 8월 8일 토요일 오후 2시</div>
+        <div class="wedding-meal-info" style="background-color: #fbfaf7; border: 1px solid #eae7e0; border-radius: 6px; padding: 14px 18px; font-size: 13px; line-height: 1.6; color: #666; max-width: 310px; margin: 0 auto; word-break: keep-all;">
+          💡 피로연 식사는 예식 전인 <strong>오후 12시부터</strong> 가능하오니,<br>
+          먼 걸음 촉박하지 않게 먼저 편안한 식사를 즐기셔도 좋습니다.
+        </div>
+      </div>
+    `;
+  }
+});
