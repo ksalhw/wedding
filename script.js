@@ -200,7 +200,6 @@
   function buildInvitation(c, dateInfo, timeText) {
     const msg = $('.invitation-message');
     if (msg && c.invitation.message) {
-      // 줄바꿈 문자(\n)가 무시되지 않도록 br 태그 처리 적용
       msg.innerHTML = c.invitation.message.replace(/\n/g, '<br>');
     }
 
@@ -231,7 +230,7 @@
       const calendarWrapper = document.createElement('div');
       calendarWrapper.className = 'wedding-calendar';
       calendarWrapper.style.width = '100%';
-      calendarWrapper.style.order = '0'; // 안내 문구 밑, 버튼들 위에 자연스럽게 위치 지정
+      calendarWrapper.style.order = '0';
       
       const year = dateInfo.date.getFullYear();
       const month = dateInfo.date.getMonth();
@@ -264,11 +263,9 @@
         </div>
       `;
       
-      // 구조 붕괴를 막기 위해 버튼 영역 직전에 달력을 삽입합니다.
       countdownSection.insertBefore(calendarWrapper, buttonsWrapper);
     }
 
-    // 피로연 식사 안내 바인딩 (존재하지 않는 ID 에러 방지 및 HTML 요소 매핑)
     const receptionNotice = $('.reception-notice');
     if (receptionNotice) {
       receptionNotice.innerHTML = `
@@ -377,7 +374,6 @@
 
     const content = $('.story-content');
     if (content && c.story.content) {
-      // 스토리가 길어져 화면 밖으로 밀리지 않도록 줄바꿈 처리
       content.innerHTML = c.story.content.replace(/\n/g, '<br>');
     }
   }
@@ -571,8 +567,8 @@
 
   // ── Contact ──
   function buildContact(c) {
-    const groomList = c.contact?.groom || c.contacts?.groom;
-    const brideList = c.contact?.bride || c.contacts?.bride;
+    const groomList = c.contacts?.groom || c.contact?.groom;
+    const brideList = c.contacts?.bride || c.contact?.bride;
 
     if (groomList) buildContactGroup('groom', groomList);
     if (brideList) buildContactGroup('bride', brideList);
