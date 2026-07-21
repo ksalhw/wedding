@@ -715,19 +715,22 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// 모달 내부의 세로 긴 사진 크기 최적화 및 경계선 완전 제거
+// 모달 이미지 렌더링 시 발생하는 위아래 미세 픽셀 경계선/테두리 완벽 차단
 (function() {
   const style = document.createElement('style');
   style.textContent = `
     .modal-image, 
     img.modal-image,
     .modal-overlay .modal-image {
-      border: none !important;
+      display: block !important;       /* 인라인 요소 특성의 여백 차단 */
+      vertical-align: middle !important;/* 브라우저 기본 정렬선 초기화 */
+      border: 0px none transparent !important;
       outline: none !important;
       box-shadow: none !important;
       -webkit-box-shadow: none !important;
-      max-height: 80vh !important; /* 화면 높이의 80%를 넘지 않도록 제한 */
-      object-fit: contain !important; /* 비율을 유지하면서 이미지 전체가 잘림 없이 보이도록 처리 */
+      max-height: 80vh !important;
+      object-fit: contain !important;
+      margin: 0 auto !important;       /* 중앙 정렬 보장 */
     }
   `;
   document.head.appendChild(style);
