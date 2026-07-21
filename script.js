@@ -484,7 +484,7 @@
     const overlay = $('.modal-overlay');
     if (!overlay) return;
 
-    updateModalImage();
+    updateModalImage(false); // 처음 열릴 때는 페이드 아웃 애니메이션을 건너뜁니다.
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -500,18 +500,40 @@
     currentModalIndex += dir;
     if (currentModalIndex < 0) currentModalIndex = currentModalImages.length - 1;
     if (currentModalIndex >= currentModalImages.length) currentModalIndex = 0;
-    updateModalImage();
+    updateModalImage(true); // 버튼이나 스와이프로 넘길 때는 트랜지션 연출 적용
   }
 
-  function updateModalImage() {
+  // ── [수정] 스르르 페이드 효과가 나타나도록 고쳐진 모달 이미지 업데이트 로직 ──
+  function updateModalImage(useFade = true) {
     const img = $('.modal-image');
     const counter = $('.modal-counter');
-    if (img) {
+    if (!img) return;
+
+    if (useFade) {
+      // 1단계: 먼저 투명하게 어둡혀 줍니다 (CSS .fade 클래스 작동)
+      img.classList.add('fade');
+
+      // 2단계: 트랜지션 시간(250ms)이 흐른 뒤 화면 뒤편에서 주소와 텍스트를 바꿉니다.
+      setTimeout(() => {
+        img.src = currentModalImages[currentModalIndex];
+        img.alt = `Photo ${currentModalIndex + 1}`;
+        if (counter) {
+          counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
+        }
+        
+        // 3단계: 새로운 이미지가 완전히 브라우저에 받아와지면 다시 선명하게 나타납니다.
+        img.onload = () => {
+          img.classList.remove('fade');
+        };
+      }, 250);
+    } else {
+      // 모달창을 맨 처음 켰을 때는 지연 시간 없이 곧바로 이미지를 선사합니다.
+      img.classList.remove('fade');
       img.src = currentModalImages[currentModalIndex];
       img.alt = `Photo ${currentModalIndex + 1}`;
-    }
-    if (counter) {
-      counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
+      if (counter) {
+        counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
+      }
     }
   }
 
@@ -597,7 +619,7 @@
     }
   }
 
-  // ── Account (하객의 편의를 위해 숫자만 복사하도록 수정한 영역) ──
+  // ── Account ──
   function buildAccount(c) {
     if (c.accounts?.groom) buildAccountGroup('groom', c.accounts.groom, `신랑측 계좌번호`);
     if (c.accounts?.bride) buildAccountGroup('bride', c.accounts.bride, `신부측 계좌번호`);
